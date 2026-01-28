@@ -32,3 +32,9 @@ fi
 if [ "$PLATFORM" = "Termux" ] || [ "$PLATFORM" = "WSL" ]; then
   chsh -s zsh
 fi
+
+if [ "$PLATFORM" = "Termux" ] || [ "$PLATFORM" = "WSL" ]; then
+  if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  fi
+fi
