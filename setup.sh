@@ -45,3 +45,11 @@ elif [ "$PLATFORM" = "PowerShell" ]; then
   winget install JanDeDobbeleer.OhMyPosh
   echo 'oh-my-posh init pwsh | Invoke-Expression' >> $PROFILE
 fi
+
+if [ "$PLATFORM" = "Termux" ]; then
+  mkdir -p ~/.termux
+  wget -O ~/.termux/font.ttf https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+  termux-reload-settings
+elif [ "$PLATFORM" = "WSL" ] || [ "$PLATFORM" = "PowerShell" ]; then
+  echo "Please install the Meslo Nerd Font manually from here: https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k"
+fi
