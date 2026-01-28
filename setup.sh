@@ -22,3 +22,9 @@ elif [ "$PLATFORM" = "PowerShell" ]; then
   winget upgrade --all
   choco install git curl wget tar zip unzip python nodejs-lts -y
 fi
+
+if [ "$PLATFORM" = "Termux" ]; then
+  pkg install zsh zoxide -y
+elif [ "$PLATFORM" = "WSL" ]; then
+  sudo apt install zsh zoxide -y
+fi
