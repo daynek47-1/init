@@ -28,3 +28,7 @@ if [ "$PLATFORM" = "Termux" ]; then
 elif [ "$PLATFORM" = "WSL" ]; then
   sudo apt install zsh zoxide -y
 fi
+
+if [ "$PLATFORM" = "Termux" ] || [ "$PLATFORM" = "WSL" ]; then
+  chsh -s zsh
+fi
