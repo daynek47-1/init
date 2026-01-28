@@ -58,3 +58,9 @@ if [ "$PLATFORM" = "Termux" ] || [ "$PLATFORM" = "WSL" ]; then
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
   git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 fi
+
+if [ "$PLATFORM" = "Termux" ] || [ "$PLATFORM" = "WSL" ]; then
+  sed -i 's/^ZSH_THEME=".*"/ZSH_THEME="powerlevel10k\/powerlevel10k"/' ~/.zshrc
+  sed -i 's/^plugins=(.*)/plugins=(git zoxide zsh-syntax-highlighting zsh-autosuggestions)/' ~/.zshrc
+  echo 'eval "$(zoxide init zsh)"' >> ~/.zshrc
+fi
