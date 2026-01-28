@@ -53,3 +53,8 @@ if [ "$PLATFORM" = "Termux" ]; then
 elif [ "$PLATFORM" = "WSL" ] || [ "$PLATFORM" = "PowerShell" ]; then
   echo "Please install the Meslo Nerd Font manually from here: https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k"
 fi
+
+if [ "$PLATFORM" = "Termux" ] || [ "$PLATFORM" = "WSL" ]; then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+  git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+fi
