@@ -6,8 +6,6 @@ elif uname -r | grep -q "microsoft"; then # Check kernel for microsoft
   PLATFORM="WSL"
 elif [ -n "$WSL_DISTRO_NAME" ]; then # Check for WSL specific environment variable
   PLATFORM="WSL"
-elif [ -n "$PSVersionTable" ]; then
-  PLATFORM="PowerShell"
 else
   PLATFORM="Unknown"
 fi
@@ -20,9 +18,6 @@ if [ "$PLATFORM" = "Termux" ]; then
 elif [ "$PLATFORM" = "WSL" ]; then
   sudo apt update && sudo apt upgrade -y
   sudo apt install git curl wget tar zip unzip python3 nodejs npm -y
-elif [ "$PLATFORM" = "PowerShell" ]; then
-  winget upgrade --all
-  choco install git curl wget tar zip unzip python nodejs-lts -y
 fi
 
 if [ "$PLATFORM" = "Termux" ]; then
@@ -43,16 +38,13 @@ fi
 
 if [ "$PLATFORM" = "Termux" ] || [ "$PLATFORM" = "WSL" ]; then
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-elif [ "$PLATFORM" = "PowerShell" ]; then
-  winget install JanDeDobbeleer.OhMyPosh
-  echo 'oh-my-posh init pwsh | Invoke-Expression' >> $PROFILE
 fi
 
 if [ "$PLATFORM" = "Termux" ]; then
   mkdir -p ~/.termux
   wget -O ~/.termux/font.ttf https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
   termux-reload-settings
-elif [ "$PLATFORM" = "WSL" ] || [ "$PLATFORM" = "PowerShell" ]; then
+elif [ "$PLATFORM" = "WSL" ]; then # Removed PowerShell specific instruction for font
   echo "Please install the Meslo Nerd Font manually from here: https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k"
 fi
 
