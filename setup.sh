@@ -2,10 +2,12 @@
 
 if [ -d "/data/data/com.termux" ]; then
   PLATFORM="Termux"
+elif uname -r | grep -q "microsoft"; then # Check kernel for microsoft
+  PLATFORM="WSL"
+elif [ -n "$WSL_DISTRO_NAME" ]; then # Check for WSL specific environment variable
+  PLATFORM="WSL"
 elif [ -n "$PSVersionTable" ]; then
   PLATFORM="PowerShell"
-elif grep -q "Microsoft" /proc/version; then
-  PLATFORM="WSL"
 else
   PLATFORM="Unknown"
 fi
@@ -63,4 +65,14 @@ if [ "$PLATFORM" = "Termux" ] || [ "$PLATFORM" = "WSL" ]; then
   sed -i 's/^ZSH_THEME=".*"/ZSH_THEME="powerlevel10k\/powerlevel10k"/' ~/.zshrc
   sed -i 's/^plugins=(.*)/plugins=(git zoxide zsh-syntax-highlighting zsh-autosuggestions)/' ~/.zshrc
   echo 'eval "$(zoxide init zsh)"' >> ~/.zshrc
+fi
+
+# Install Gemini CLI (for all platforms where npm is available)
+echo "Installing Gemini CLI..."
+if command -v npm &> /dev/null
+then
+    npm install -g @google/gemini-cli
+    echo "Gemini CLI installed successfully."
+else
+    echo "npm not found. Skipping Gemini CLI installation."
 fi
