@@ -1,0 +1,95 @@
+# --- CORE WRAPPERS ---
+alias u='uv'
+alias ur='u run'
+alias py='ur python'
+alias pi='u pip'
+alias g='git'
+alias ed='nano'
+
+# --- PYTHON EXECUTION ---
+alias pyi='py -m IPython'
+alias pyr='py run.py'
+alias pym='py main.py'
+alias pya='py app.py'
+alias pyc='find . -type d -name "__pycache__" -exec rm -rf {} +'
+alias pyg='ps aux | grep python'
+alias pdoc='py -m pydoc'
+alias pls='py -c "import polars as pl; print(pl.Config.state())"'
+alias rcat='py -m rich'
+
+# --- PIP HELPERS ---
+alias pii='pi install --jobs 1'
+alias pil='pi list'
+alias pif='pi freeze > requirements.txt'
+alias pir='pi install -r requirements.txt'
+alias piu='pi list | fzf -m --header "Uninstall Pip Lib" | awk "{print $1}" | xargs -r pi uninstall'
+alias reqs='pif'
+
+# --- SYSTEM (APT) ---
+alias pk='sudo apt'
+alias pkup='sudo apt update && sudo apt upgrade -y'
+alias pki='sudo apt install -y'
+alias pku='sudo apt remove -y'
+alias pks='apt search'
+alias pkr='apt list --installed | fzf -m --header "Uninstall System Pkg" | awk -F/ "{print $1}" | xargs -r sudo apt remove -y'
+
+# --- VIRTUAL ENV ---
+alias vc='u venv'
+alias va='source .venv/bin/activate || source venv/bin/activate'
+alias vd='deactivate'
+alias venv='python -m venv venv && va && echo "Env Created & Activated"'
+
+# --- DEV TOOLS ---
+alias ru='ur ruff'
+alias rf='ru format .'
+alias rx='ru check --fix'
+alias rw='ru check --watch --fix'
+alias uv_srv='ur uvicorn'
+alias dev='uv_srv main:app --reload'
+alias uvh='dev --host 0.0.0.0'
+alias fast='ur fastapi dev main.py'
+alias sql='sqlite3'
+alias csv='column -s, -t <'
+
+# --- NAVIGATION ---
+alias zsh='ed ~/.zshrc'
+alias als='ed ~/.aliases'
+alias rl='source ~/.zshrc && echo "ZSH Config Reloaded"'
+
+alias ls='eza --icons --group-directories-first'
+alias l='ls -CF'
+alias la='ls -A'
+alias ll='ls -alF'
+
+alias cls='clear'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias md='mkdir -p'
+alias rd='rm -rf'
+alias base='cd && cd /mnt/c/dev/base'
+
+# --- GIT ---
+alias gs='g status'
+alias ga='g add .'
+alias gc='g commit -m'
+alias gp='g push'
+alias gl='g log --oneline --graph'
+
+# --- UTILITIES ---
+alias clip='clip.exe'
+alias paste='powershell.exe Get-Clipboard'
+alias say='spd-say'
+alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
+alias notif='notify-send "Task Complete"'
+alias top='htop'
+alias dusage='ncdu'
+alias size='du -sh *'
+alias myip='ip addr | grep "inet "'
+alias path='echo $PATH | tr ":" "\n"'
+
+# --- FUZZY TOOLS ---
+alias o='fzf --preview "bat --color=always --style=numbers {}" | xargs -r ed'
+alias f='cd $(find . -type d -not -path "*/.*" | fzf --header "Jump to Directory")'
+
+# --- GEMINI ---
+alias gy="gemini -y"

@@ -1,0 +1,25 @@
+# Ignore sensitive files and temporary backups
+.private_vars
+dotfiles_backup.md
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore compilation artifacts
+*.o
+*.pyc
+__pycache__/
+
+# Ignore editor/IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore Node.js dependencies
+node_modules/
+
+# Ignore Python virtual environments
+.venv/
+venv/
