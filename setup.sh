@@ -1,8 +1,8 @@
 #!/bin/bash
 
-if [ -d "/data/data/com.termux" ]; then
+if [ -n "$TERMUX_VERSION" ]; then # More robust Termux detection using a Termux-specific env var
   PLATFORM="Termux"
-elif uname -r | grep -q "microsoft"; then # Check kernel for microsoft
+elif uname -r | grep -q "microsoft"; then # Check kernel for microsoft (for WSL)
   PLATFORM="WSL"
 elif [ -n "$WSL_DISTRO_NAME" ]; then # Check for WSL specific environment variable
   PLATFORM="WSL"
